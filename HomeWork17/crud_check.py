@@ -1,21 +1,10 @@
 import pytest
 import time
 import json
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
 from data.links import Main_Page_URl
 from data.page_objects import MainPage, UserPage, ChangeUserPage, LoginPage, UsersCred
 
 
-
-
-options = webdriver.ChromeOptions()
-options.add_argument('--ignore-ssl-errors=yes')
-options.add_argument('--ignore-certificate-errors')
-
-
-driver = webdriver.Chrome(service=s)
 
 # Login to admin web
 driver.get(secret_variables['access_url'])
