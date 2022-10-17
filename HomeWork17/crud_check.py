@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from data.links import Main_Page_URl
 from data.page_objects import MainPage, UserPage, ChangeUserPage, LoginPage, UsersCred
-from data.json name, password, endpoint
+from data1 name, password, endpoint
 
 
 
