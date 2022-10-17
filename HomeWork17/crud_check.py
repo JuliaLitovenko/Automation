@@ -8,7 +8,7 @@ from data.links import Main_Page_URl
 from data.page_objects import MainPage, UserPage, ChangeUserPage, LoginPage, UsersCred
 
 with open(
-        "resources/data.json",
+        "data.json",
         "r") as f:
     secret_variables = json.load(f)
 
