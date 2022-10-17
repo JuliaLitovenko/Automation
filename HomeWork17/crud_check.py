@@ -15,7 +15,6 @@ options.add_argument('--ignore-ssl-errors=yes')
 options.add_argument('--ignore-certificate-errors')
 
 
-s = Service('C:/Users/yuliia.litovenko/PycharmProjects/Automation/venv/chromedriver.exe')
 driver = webdriver.Chrome(service=s)
 
 # Login to admin web
