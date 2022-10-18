@@ -1,63 +1,52 @@
+import time
 import pytest
-import requests
-import json
-import random
-
-# values
-headers = {
-    'Content-Type': 'application/json'
-}
-urls = ["https://www.aqa.science/users/"]
+from selenium.webdriver.common.by import By
+from tests.data.locators import CreateUsers, UpdateUsers, DeleteUsers
 
 
-@pytest.fixture
-def ses_class():
-    pass
-
-
-@pytest.fixture
-def login_logout_func():
-    pass
-
-
-def test_create_user_api(cred_file):
+def test_create_user():
     # Create user
-    payload = json.dumps({
-        "username": f"Uswer_{random.randint(0, 100)}",
-        "email": f"{random.randint(0, 100)}@rrr.com",
-        "groups": []
-    })
-    response = requests.request("POST", urls[0], auth=cred_file, data=payload, headers=headers).json()
-    with open('added_user.json', "w") as f:
-        json.dump(response, f)
-    assert response["url"] is not None, "User not created"
+    add_user = pytest.driver.find_element(By.XPATH, CreateUsers.add_usr_id)
+    add_user.click()
+
+    create_username = pytest.driver.find_element(By.XPATH, CreateUsers.username_id)
+    create_password = pytest.driver.find_element(By.XPATH, CreateUsers.password_id)
+    create_conf_password = pytest.driver.find_element(By.XPATH, CreateUsers.confirm_pswd_id)
+    create_save = pytest.driver.find_element(By.XPATH, CreateUsers.save_id)
+
+    create_username.send_keys(pytest.secret_variables["username"])
+    create_password.send_keys(pytest.secret_variables["password"])
+    create_conf_password.send_keys(pytest.secret_variables["password"])
+    create_save.click()
 
 
-def test_read_user_api(check_user, user_data):
-    # find created user in users list
-    with open('users_list.json', 'r') as f:
-        data = json.load(f)
-    value = ""
-    for item in data:
-        if item.get("url", None) == user_data:
-            value += item.get("url")
-    assert value == user_data, "User not found"
+def test_read_user(find_func):
+    # Check success of creation
+    success_create = pytest.driver.find_element(By.XPATH, CreateUsers.success_id)
+    assert success_create.text == pytest.secret_variables["username"], print("User didn't created")
 
 
-def test_update_user_api(user_data, cred_file):
-    # update created user
-    payload = json.dumps({
-        "url": user_data,
-        "username": f"Uswer_{random.randint(0, 100)}",
-        "email": f"{random.randint(0, 100)}@rrr.com",
-        "groups": []
-    })
-    response = requests.request("PATCH", user_data, auth=cred_file, headers=headers, data=payload)
-    assert response.status_code == 200, "User not updated"
+def test_update_user(find_func):
+    # Update user
+    first_name = pytest.driver.find_element(By.XPATH, UpdateUsers.first_name_id)
+    last_name = pytest.driver.find_element(By.XPATH, UpdateUsers.last_name_id)
+    save_updates = pytest.driver.find_element(By.XPATH, UpdateUsers.save_btn_id)
+
+    first_name.send_keys(pytest.secret_variables["first_name"])
+    last_name.send_keys(pytest.secret_variables["last_name"])
+    time.sleep(3)
+    save_updates.click()
 
 
-def test_delete_user_api(user_data, cred_file):
-    # delete created user and erase file added_user.json
-    response = requests.request("DELETE", user_data, auth=cred_file)
-    open('added_user.json', 'w').close()
-    assert response.status_code == 204, "User not deleted"
+def test_delete_user(find_func):
+    # Delete user
+    delete_user = pytest.driver.find_element(By.XPATH, DeleteUsers.delete_btn_id)
+    delete_user.click()
+    time.sleep(4)
+
+    confirm_delete = pytest.driver.find_element(By.XPATH, DeleteUsers.confirm_delete_id)
+    confirm_delete.click()
+
+    # Check success of deletion
+    count_users = pytest.driver.find_element(By.XPATH, DeleteUsers.count_users_id)
+    assert count_users.text == '0 users', print("User didn't deleted")
