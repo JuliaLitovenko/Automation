@@ -1,37 +1,37 @@
-import random
-import names
-
 class LoginPage:
-    submit_button_id = '//*[@id="login-form"]/div[3]/input'
-    login_field_id = 'id_username'
-    password_field_id = '//*[@id="id_password"]'
+    username_id = '//*[@id="id_username"]'
+    pswd_id = '//*[@id="id_password"]'
+    submit_btn = '//*[@id="login-form"]/div[3]/input'
 
 
-class MainPage:
-    page_header_id = '//*[@id="site-name"]/a'
-    user_list_button = '//*[@id="content-main"]/div/table/tbody/tr[2]/th/a'
+class AdminPage(LoginPage):
+    admin_page_header_id = '//*[@id="site-name"]/a'
+    logout_id = '//*[@id="user-tools"]/a[3]'
+    log_again_id = '//*[@id="content"]/p[2]/a'
 
 
-class UserPage:
-    add_user_button = '//*[@id="content-main"]/ul/li/a'
-    user_name_field = '//*[@id="id_username"]'
-    password_field = '//*[@id="id_password1"]'
-    password_confirmation_field = '//*[@id="id_password2"]'
-    save_button = '//*[@id="user_form"]/div/div/input[1]'
-    successful_message = '//*[@id="main"]/div/ul/li'
-    search_field = '//*[@id="searchbar"]'
-    search_button = '//*[@id="changelist-search"]/div/input[2]'
-    search_result = '//*[@id="changelist-search"]/div/span'
-    user_data = '//*[@id="result_list"]/tbody/tr/th/a'
+class CreateUsers:
+    add_usr_id = '//*[@id="content-main"]/div/table/tbody/tr[2]/td[1]/a'
+    username_id = '//*[@id="id_username"]'
+    password_id = '//*[@id="id_password1"]'
+    confirm_pswd_id = '//*[@id="id_password2"]'
+    save_id = '//*[@id="user_form"]/div/div/input[1]'
+    success_id = '//*[@id="content"]/h2'
 
 
-class ChangeUserPage:
-    user_name_field = '//*[@id="id_username"]'
-    save_button = '//*[@id="user_form"]/div/div/input[1]'
-    delete_button = '//*[@id="user_form"]/div/div/p/a'
-    submit_delete_button = '//*[@id="content"]/form/div/input[2]'
+class UpdateUsers:
+    first_name_id = '//*[@id="id_first_name"]'
+    last_name_id = '//*[@id="id_last_name"]'
+    save_btn_id = '//*[@id="user_form"]/div/div/input[1]'
 
-class UsersCred:
-    main_user_name = f"user111_{random.randint(0, 100)}"
-    changed_user_name = f"user5555_{random.randint(0, 100)}"
-    password = 'Test!123'
+
+class FindUsers:
+    users_id = '//*[@id="content-main"]/div/table/tbody/tr[2]/th/a'
+    find_field_id = '//*[@id="searchbar"]'
+    found_username = '//*[@id="result_list"]/tbody/tr/th/a'
+
+
+class DeleteUsers:
+    delete_btn_id = '//*[@id="user_form"]/div/div/p/a'
+    confirm_delete_id = '//*[@id="content"]/form/div/input[2]'
+    count_users_id = '//*[@id="changelist-form"]/p'
