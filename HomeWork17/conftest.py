@@ -13,7 +13,7 @@ from pathlib import Path
 
 # make path runnable on different OS
 project_pass = Path.cwd()
-file_pass = project_pass.joinpath("data", "data1.json")
+file_pass = project_pass.joinpath("HomeWork17", "data1.json")
 add_user_file = project_pass.joinpath("added_user.json")
 
 
