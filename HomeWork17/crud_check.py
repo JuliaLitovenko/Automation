@@ -1,7 +1,7 @@
 import time
 import pytest
 from selenium.webdriver.common.by import By
-from tests.data.locators import CreateUsers, UpdateUsers, DeleteUsers
+from data.page_objects import CreateUsers, UpdateUsers, DeleteUsers
 
 
 def test_create_user():
