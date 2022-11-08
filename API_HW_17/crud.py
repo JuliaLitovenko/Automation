@@ -26,14 +26,14 @@ def login_logout_func():
 def test_create_user_api(cred_file):
     # Create user
     payload = json.dumps({
-        "username": f"magomed_{random.randint(0, 100)}",
-        "email": f"{random.randint(0, 100)}@mgm.com",
+        "username": f"User22_{random.randint(0, 100)}",
+        "email": f"{random.randint(0, 100)}@ddd.com",
         "groups": []
     })
     response = requests.request("POST", urls[0], auth=cred_file, data=payload, headers=headers).json()
     with open('added_user.json', "w") as f:
         json.dump(response, f)
-    assert response["url"] is not None, "User not crested"
+    assert response["url"] is not None, "User not created"
 
 
 def test_read_user_api(check_user, user_data):
@@ -51,8 +51,8 @@ def test_update_user_api(user_data, cred_file):
     # update created user
     payload = json.dumps({
         "url": user_data,
-        "username": f"magomed_{random.randint(0, 100)}",
-        "email": f"{random.randint(0, 100)}@mgm.com",
+        "username": f"User22_{random.randint(0, 100)}",
+        "email": f"{random.randint(0, 100)}@ddd.com",
         "groups": []
     })
     response = requests.request("PATCH", user_data, auth=cred_file, headers=headers, data=payload)
