@@ -1,0 +1,5 @@
+{
+  "name": "admin",
+  "password": "admin123",
+  "endpoint": "https://www.aqa.science/"
+}
